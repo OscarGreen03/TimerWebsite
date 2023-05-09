@@ -50,7 +50,7 @@ echo " ";
 echo $serverToken;
 echo "Client token: ";
 echo $clientToken;
-
+/*
 token:
 a9596dbf4370160294530d263b07164017e20a96e3ecb5f70a70bc9dea634cc6
 Password:
@@ -59,5 +59,5 @@ Expected Token:
 2df30a6958e320f1da34df68041a302642241669e4c830ececfe50423ad4f0b6
 ClientSide Token Sent:
 d5b592c05dc25b5032553f1b27f4139be95e881f73db33b02b05ab20c3f9981e
-
+*/
 ?>
