@@ -11,6 +11,7 @@ if (!isset($_POST['clientToken']) || empty($_POST['clientToken'])) {
 }
 if (!isset($_POST['data']) || empty($_POST['data'])) {
     //echo "No Data sent";
+
 }
 if (!isset($_POST['action']) || empty($_POST['action'])) {
     //echo "Action not set";
