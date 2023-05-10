@@ -20,7 +20,7 @@ fclose($fp);
 
 <button onclick="validateUser()">Validate user</button>
 <label for="userid"></label><input type="text" id="userid" placeholder="userid">
-<label for="password"></label><input type="text" id="password" placeholder="password">
+<label for="password"></label><input type="password" id="password" placeholder="password">
 
 
 
