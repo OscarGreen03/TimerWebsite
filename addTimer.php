@@ -5,6 +5,7 @@ $interval = $_POST['interval'];
 $type = $_POST['type'];
 $finite = $_POST['finite'];
 $mute = $_POST['mute'];
+
 // save data to csv
 if ($type == "temp"){
     $fp = fopen('Timers/temporaryTimers.csv', 'a');

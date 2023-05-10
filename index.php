@@ -19,12 +19,13 @@ fclose($fp);
 <button onclick="getToken('oscar')">Get token</button>
 
 <button onclick="validateUser()">Validate user</button>
-<input type="text" id="userid" placeholder="userid">
-<input type="text" id="password" placeholder="password">
+<label for="userid"></label><input type="text" id="userid" placeholder="userid">
+<label for="password"></label><input type="text" id="password" placeholder="password">
 
 
 
 <script>
+    var tokenz = "";
    //const crypto = require('crypto');
     function createTimer(name, interval,type, finite, mute) {
         // create a new timer object
@@ -51,31 +52,48 @@ fclose($fp);
     }
 
     function getToken(userid) {
-        data = {
-            userid: userid
-        };
-        $.ajax({
-            url: 'authentication/getToken.php',
-            data: data,
-            type: 'post',
-            success: function (token) {
-                //alert(token);
-            },
-            error: function () {
-                alert("Error getting token");
-            }
-        });
+        return new Promise (function(resolve, reject){
+            data = {
+                userid: userid
+            };
+            $.ajax({
+                url: 'authentication/getToken.php',
+                data: data,
+                type: 'post',
+                success: function (token) {
+                    //alert(token);
+                    resolve(token)
+                },
+                error: function (err) {
+                    reject(err);
+                }
+
+            });
+
+
+
+
+
+        })
+
     }
 
     function validateUser(){
         const userid = document.getElementById("userid").value;
         const password = document.getElementById("password").value;
-        const token = getToken(userid);
-        // perform sha256 hash on password . token
-        console.log(token);
-        sha256(token * password).then(function (hash) {
-            authorise(userid, hash);
+        getToken(userid).then(function (token){
+            const joinedString = token + password;
+            //console.log("joinedString: ");
+            //console.log(joinedString);
+            sha256(joinedString).then(function (hash) {
+                authorise(userid, hash);
+            });
+        }).catch(function (err){
+            console.log(err);
         });
+        // perform sha256 hash on password . token
+
+
     }
 
     async function sha256(input) {
@@ -99,10 +117,33 @@ fclose($fp);
         const data = {
             userid: userid,
             clientToken: hash,
+
         };
 
         $.ajax({
-            url: 'authentication/validateToken.php',
+            url: 'authentication/validateAction.php',
+            data: data,
+            type: 'post',
+            success: function (tokenValid) {
+                alert(tokenValid);
+            },
+            error: function () {
+                alert("Error validating token");
+            }
+        });
+
+    }
+    function sendAction(userid, hash, action, userData){
+
+        const data = {
+            userid: userid,
+            clientToken: hash,
+            action: action,
+            data: userData
+        };
+
+        $.ajax({
+            url: 'authentication/validateAction.php',
             data: data,
             type: 'post',
             success: function (tokenValid) {
