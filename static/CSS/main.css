@@ -1,0 +1,26 @@
+.notification {
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    z-index: 9999;
+    transition: opacity 1s;
+    border-radius: 10px;
+    opacity: 0.7;
+    width: min(100%, 400px);
+  }
+  
+  .notification.error {
+    background-color: red;
+  }
+  
+  .notification.not {
+    background-color: blue;
+  }
+  
+  .notification.fade {
+    opacity: 0;
+  }
